@@ -16,7 +16,7 @@ public class LeverConnector implements JobConnector {
         return parse(http.getJson("https://api.lever.co/v0/postings/" + c.boardToken + "?mode=json"));
     }
 
-    List<DiscoveredJob> parse(JsonNode root) {
+    public List<DiscoveredJob> parse(JsonNode root) {
         List<DiscoveredJob> out = new ArrayList<>();
         for (JsonNode j : root)
             out.add(new DiscoveredJob(j.path("id").asText(), j.path("text").asText(),

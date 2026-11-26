@@ -16,7 +16,7 @@ public class GreenhouseConnector implements JobConnector {
         return parse(http.getJson("https://boards-api.greenhouse.io/v1/boards/" + c.boardToken + "/jobs?content=true"));
     }
 
-    List<DiscoveredJob> parse(JsonNode root) {
+    public List<DiscoveredJob> parse(JsonNode root) {
         List<DiscoveredJob> out = new ArrayList<>();
         for (JsonNode j : root.path("jobs"))
             out.add(new DiscoveredJob(j.path("id").asText(), j.path("title").asText(),
