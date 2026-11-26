@@ -1,0 +1,74 @@
+#spring:
+#  application.name: job-portal
+#  datasource:
+#    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:jobportal}
+#    username: ${DB_USERNAME:jobportal}
+#    password: ${DB_PASSWORD:jobportal}
+#  jpa:
+#    open-in-view: false
+#    hibernate.ddl-auto: none
+#  flyway.enabled: true
+#  servlet.multipart:
+#    max-file-size: 10MB
+#    max-request-size: 10MB
+#server.port: ${PORT:8080}
+#management.endpoints.web.exposure.include: health,info
+#app:
+#  encryption-key: ${APP_ENCRYPTION_KEY:}
+#  data-dir: ${APP_DATA_DIR:./data}
+#  scheduler:
+#    enabled: ${SCHEDULER_ENABLED:true}
+#    cron: ${SCHEDULER_CRON:0 0 */2 * * *}
+#    zone: ${SCHEDULER_ZONE:UTC}
+#    delay-ms: ${SCHEDULER_DELAY_MS:1500}
+#    retries: ${HTTP_RETRIES:3}
+spring:
+  profiles:
+    active: dev
+  application.name: job-portal
+  datasource:
+    url: jdbc:postgresql://aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres?sslmode=require&currentSchema=jobportal
+    username: postgres.unuzuxyygkzknrswnoil
+    password: 'k9#mP2$vL8qR!4zW'
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate.default_schema: jobportal
+  flyway:
+    enabled: true
+    schemas: jobportal
+    default-schema: jobportal
+    create-schemas: true
+  servlet.multipart:
+    max-file-size: 10MB
+    max-request-size: 10MB
+
+server:
+  port: ${PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+app:
+  render:
+    base-url: http://localhost:8080/api/v1/awakeRender
+  encryption-key: ${APP_ENCRYPTION_KEY:}
+  data-dir: ${APP_DATA_DIR:./data}
+  scheduler:
+    enabled: ${SCHEDULER_ENABLED:true}
+    cron: ${SCHEDULER_CRON:0 0 */2 * * *}
+    zone: ${SCHEDULER_ZONE:UTC}
+    delay-ms: ${SCHEDULER_DELAY_MS:1500}
+    retries: ${HTTP_RETRIES:3}
+#  cleanup:
+#    enabled: ${CLEANUP_ENABLED:true}
+#    cron: ${CLEANUP_CRON:0 0 0 * * SUN}
+#    zone: ${CLEANUP_ZONE:Asia/Kolkata}

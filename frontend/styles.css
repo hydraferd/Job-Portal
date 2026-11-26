@@ -1,0 +1,11 @@
+html, body { height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: #f5f6fa; }
+.page { padding: 16px; max-width: 1200px; margin: 0 auto; }
+.grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-bottom: 16px; }
+.row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.row > mat-form-field { flex: 1 1 220px; }
+.full { width: 100%; }
+.scroll { overflow-x: auto; }
+.muted { color: #666; font-size: 13px; }
+.big { font-size: 32px; font-weight: 500; margin: 4px 0 0; }
+mat-card { margin-bottom: 16px; }
+pre.log { white-space: pre-wrap; background: #fafafa; padding: 8px; border-radius: 4px; margin: 0; }

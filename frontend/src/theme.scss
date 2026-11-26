@@ -1,0 +1,15 @@
+@use '@angular/material' as mat;
+
+$light: mat.define-theme((color: (theme-type: light, primary: mat.$azure-palette)));
+$dark:  mat.define-theme((color: (theme-type: dark,  primary: mat.$azure-palette)));
+
+html {
+  color-scheme: light;
+  @include mat.all-component-themes($light);
+  @include mat.system-level-colors($light);
+}
+html.dark {
+  color-scheme: dark;
+  @include mat.all-component-colors($dark);
+  @include mat.system-level-colors($dark);
+}

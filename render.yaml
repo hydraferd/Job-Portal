@@ -1,0 +1,26 @@
+# Verify plan names against current Render pricing before deploying.
+# A paid web plan is needed for the persistent disk and so the scheduler is never spun down.
+databases:
+  - name: jobportal-db
+    plan: basic-256mb
+    databaseName: jobportal
+    user: jobportal
+services:
+  - type: web
+    name: job-portal
+    runtime: docker
+    plan: starter
+    healthCheckPath: /actuator/health
+    disk:
+      name: job-portal-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - {key: APP_ENCRYPTION_KEY, generateValue: true}
+      - {key: APP_DATA_DIR, value: /data}
+      - {key: DB_HOST, fromDatabase: {name: jobportal-db, property: host}}
+      - {key: DB_PORT, fromDatabase: {name: jobportal-db, property: port}}
+      - {key: DB_NAME, fromDatabase: {name: jobportal-db, property: database}}
+      - {key: DB_USERNAME, fromDatabase: {name: jobportal-db, property: user}}
+      - {key: DB_PASSWORD, fromDatabase: {name: jobportal-db, property: password}}
+      - {key: SCHEDULER_CRON, value: "0 0 */2 * * *"}

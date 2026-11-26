@@ -1,0 +1,9 @@
+app:
+  encryption-key: ${APP_ENCRYPTION_KEY:change-this-to-your-own-long-random-string}
+  scheduler:
+    cron: "0 0 */2 * * *"         # every 2 hours
+    zone: Asia/Kolkata
+#  cleanup:
+#    cron: "0 */1 * * * *"
+#    zone: Asia/Kolkata
+logging.level.com.jobportal: INFO

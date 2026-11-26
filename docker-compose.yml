@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${DB_NAME:-jobportal}
+      POSTGRES_USER: ${DB_USERNAME:-jobportal}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-jobportal}
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME:-jobportal}"]
+      interval: 5s
+      retries: 10
+  app:
+    build: .
+    depends_on:
+      db: {condition: service_healthy}
+    env_file: [.env]
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      APP_DATA_DIR: /data
+    ports: ["8080:8080"]
+    volumes: [appdata:/data]
+volumes:
+  pgdata:
+  appdata:

@@ -1,0 +1,3 @@
+package com.jobportal.domain;
+
+public enum Platform { GREENHOUSE, LEVER, ASHBY, SMARTRECRUITERS, WORKDAY, ORACLE_RECRUITING, SUCCESSFACTORS, CUSTOM }
